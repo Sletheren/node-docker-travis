@@ -1,0 +1,14 @@
+version: '3'
+services:
+  mongodb:
+    container_name: database_mongodb
+    image: mongo
+    ports:
+      - "27017:27017"
+  nodejs:
+    container_name: backend_nodejs
+    build: .
+    ports:
+      - "8080:8080"
+    links:
+      - mongodb
