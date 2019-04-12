@@ -20,5 +20,6 @@ deploy:
   script: 
     # push to dockerhub & heroku
     docker push rakhma/backend_nodejs
+    docker push rakhma/backend_nodejs2
   on:
     branch: master
