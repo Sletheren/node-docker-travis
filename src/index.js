@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 MongoClient.connect('mongodb://mongodb:27017/database', { useNewUrlParser: true }, function (err) {
   if (err) {
-    console.log('Unable to connect to Mongo.')
+    console.log('Unable to connect to Mongo.', err)
     process.exit(1)
   } else {
     console.log('Connected to Mongodb!!')
