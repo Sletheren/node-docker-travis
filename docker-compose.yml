@@ -13,3 +13,11 @@ services:
       - "8080:8080"
     links:
       - mongodb
+  nodejs2:
+    container_name: backend_nodejs2
+    image: rakhma/backend_nodejs2
+    build: .
+    ports:
+      - "8082:8082"
+    links:
+      - mongodb
