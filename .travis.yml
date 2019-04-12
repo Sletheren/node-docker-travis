@@ -7,13 +7,16 @@ services:
 before_install:
   # login to docker hub
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  # login to heroku
+  - docker login -u _ -p $HEROKU_TOKEN registry.heroku.com
 install:
   # install deps
   - docker-compose build
   - docker-compose up -d
 script:
   - docker exec -ti backend_nodejs npm run test
-  - docker exec -ti backend_nodejs2 npm run test
+  # Tagging the image to be used with Heroku
+  - docker tag rakhma/backend_nodejs registry.heroku.com/node-docker-travis/web
 after_script:
   - docker-compose stop
 deploy:
