@@ -17,8 +17,7 @@ after_script:
   - docker-compose stop
 deploy:
   provider: script
-  script: |
-    docker push rakhma/backend_nodejs && \
-    docker push rakhma/backend_nodejs2
+  script:
+    - bash deploy.sh
   on:
     branch: master
