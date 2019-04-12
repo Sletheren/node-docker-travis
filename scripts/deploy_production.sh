@@ -1,3 +1,4 @@
 #!/bin/bash
+echo "Doing your production deployment to DockerHub...."
 docker push rakhma/backend_nodejs
-docker push rakhma/backend_nodejs2
+echo "Done! deployed to DockerHub SUCCESSFULLY"
