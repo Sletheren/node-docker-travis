@@ -8,7 +8,7 @@ before_install:
   # login to docker hub
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   # login to heroku
-  - docker login -u _ -p $HEROKU_TOKEN registry.heroku.com
+  - docker login -u _ -p "$HEROKU_TOKEN" registry.heroku.com
 install:
   # install deps
   - docker-compose build
