@@ -1,14 +1,24 @@
 sudo: required
- language: node_js
+language: node_js
 node_js:
   - "8"
 services:
   - docker
 before_install:
-  # login to docker registries
-  - echo "$ DOCKER_PASSWORD" | docker login -u "$ DOCKER_USERNAME" --password-stdin
+  # login to docker hub
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 install:
   # install deps
-  - npm install
+  - docker-compose build
+  - docker-compose up -d
 script:
-  - npm test
+  - docker exec -ti backend_nodejs npm run test
+after_script:
+  - docker-compose stop
+deploy:
+  provider: script
+  script: 
+    # push to dockerhub & heroku
+    docker push rakhma/backend_nodejs
+  on:
+    branch: master
