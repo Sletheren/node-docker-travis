@@ -13,11 +13,18 @@ install:
   - docker-compose up -d
 script:
   - docker exec -ti backend_nodejs npm run test
+  - docker exec -ti backend_nodejs2 npm run test
 after_script:
   - docker-compose stop
 deploy:
   provider: script
   script:
-    - bash deploy.sh
+    - bash scripts/deploy_production.sh
   on:
     branch: master
+deploy:
+  provider: script
+  script:
+    - bash scripts/deploy_staging.sh
+  on:
+    branch: staging
