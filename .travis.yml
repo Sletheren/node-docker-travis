@@ -5,6 +5,11 @@ node_js:
 services:
   - docker
 before_install:
+  # Docker Compose Install 
+  - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  # Heroku CLI Install
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
 install:
   # install deps
@@ -27,4 +32,25 @@ deploy:
   script:
     - bash scripts/deploy_staging.sh
   on:
-    branch: staging
+    branch: heroku
+deploy:
+  #specify the provider 
+  provider: elasticbeanstalk
+  #specify the region where the provider is present, You can get this from the AWS ElasticBeanstalk dashboard
+  region: "us-east-2"
+  #Specify the application name in AWS elastic beanstalk
+  app: "Travis docker AWS"
+  #Specify the environment name in AWS elastic beanstalk
+  env: "TravisDockerAws-env"
+  #Specify the Bucket name which is the name of the S3 (storage) which is created as part of Elastic beanstalk in AWS
+  bucket_name: "elasticbeanstalk-us-east-2-736607720718"
+  #specify the path of the Bucket , this will be similar to the App name above
+  bucket_path: "Travis docker AWS"
+  #specify when you want to deploy (we want to deploy only when we push code to master branch)
+  on:
+    branch: aws
+  #Specify the Environment variable name from which Travis can get the ACCESS_KEY to AWS
+  access_key_id: $AWS_ID
+  #Specify the Environment variable name from which Travis can get the SECRET_KEY to AWS
+  secret_access_key:
+    secure: "$AWS_PASSWORD"
