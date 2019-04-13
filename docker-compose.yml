@@ -8,8 +8,10 @@ services:
   nodejs:
     container_name: backend_nodejs
     image: rakhma/backend_nodejs
+    environment:
+      - SERVER_PORT="80"
     build: .
     ports:
-      - "8080:8080"
+      - "80:80"
     links:
       - mongodb

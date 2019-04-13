@@ -1,6 +1,6 @@
 const express = require('express')
 const axios = require('axios')
-const PORT = 8080;
+const PORT = process.env.SERVER_PORT || 80;
 const MongoClient = require('mongodb').MongoClient
 const bodyParser = require('body-parser');
 
