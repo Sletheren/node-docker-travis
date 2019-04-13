@@ -5,10 +5,6 @@ node_js:
 services:
   - docker
 before_install:
-  # Docker Compose Install 
-  - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
   # Heroku CLI Install
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
 install:
